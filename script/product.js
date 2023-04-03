@@ -41,51 +41,74 @@ window.onload = function () {
     "unique_id": prod_query
     });
 
-    var requestOptions = {
-    method: 'POST',
-    headers: myHeaders,
-    body: raw,
-    redirect: 'follow'
+    var requestOptions01 = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
     };
+    fetch("https://pim.unbxd.io/api/v1/catalogueConfig/6391b1448f93e67002742cef", requestOptions01)
+  .then(response => response.json())
+  .then(result => {
+    data=result["data"];
+    
+    const dictionary = {};
+    for (const property of data.properties) {
+    dictionary[property.field_id] = {
+        name: property.name,
+        group: property.group,
+        };
+    }
 
-    fetch("https://pim.unbxd.io/peppercorn/api/v2/catalogueProduct", requestOptions)
-    .then(response => response.json())
-    .then(result => {
-        let prod_container = document.getElementById("row");
-        product=result["data"]["response"]["products"][0]
-        console.log(product)
-        let price = product['field_390']+".00";
-        let decimal = (parseFloat(price).toFixed(2)).slice(-2);
-        let displayPrice = String(parseInt(price));
-        prod_container.innerHTML += `<div class="column1">
-            <img class="image" src="${product['productImage']}">
-        </div>
-        <div class="column2">
-            <p class="image_title">${product['productName']}</p>
-            <p class="price"><sup id="sup_price">$</sup>${displayPrice}<sup id="sup_price">${decimal}</sup></p>
-            <p class="image_body">Quanitity : ${product['field_485']}</p>
-            <p class="return_policy">Parent ID :${product['parentId']}</p>
-            <p class="return_policy">Updated On :${product['updated_at']}</p>
-            <p class="return_policy">Product Status :${product['product_status']}</p>
-            <p class="return_policy"> Return Policy : ${product["field_443"]}</p>
-            <p class="return_policy">About Us :${product['field_421']}</p>
-        </div>
-        <div class="column3">
-        <p class="image_body">${product['field_476']}</p>
-        </div>`
-        
+    var requestOptions02 = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+        };
+    
+        fetch("https://pim.unbxd.io/peppercorn/api/v2/catalogueProduct", requestOptions02)
+        .then(response => response.json())
+        .then(result => {
+            let prod_container = document.getElementById("row");
+            product=result["data"]["response"]["products"][0]
+            
+            let price = product['field_390']+".00";
+            let decimal = (parseFloat(price).toFixed(2)).slice(-2);
+            let displayPrice = String(parseInt(price));
+            prod_container.innerHTML += `<div class="column1">
+                <img class="image" src="${product['productImage']}">
+            </div>
+            <div class="column2">
+                <p class="image_title">${product['productName']}</p>
+                <p class="price"><sup id="sup_price">$</sup>${displayPrice}<sup id="sup_price">${decimal}</sup></p>
+                <p class="image_body">Quanitity : ${product['field_485']}</p>
+                <p class="return_policy"> UniqueID : ${product["uniqueId"]}</p>
+                <p class="return_policy">Parent ID :${product['parentId']}</p>
+                <p class="return_policy">Updated On :${product['updated_at']}</p>
+                <p class="return_policy">Product Status :${product['product_status']}</p>   
+            </div>
+
+            <div class="column3">
+            <p class="image_body">${product['field_476']}</p>
+            </div>
+            <div class="column3" id="more_info">
+            </div>
+            `
+            for (const fieldId in dictionary) {
+                let more_info=document.getElementById("more_info");
+                if(fieldId.includes("field")){
+                    more_info.innerHTML +=`<p class="image_body">${dictionary[fieldId].name} : ${product[fieldId]}</p>`
+                }
+            }
+            
+        })
+        .catch(error => console.log('error', error));
+  })
+  .catch(error => console.log('error', error));
+    
 
 
-
-
-
-
-
-
-
-
-    })
-    .catch(error => console.log('error', error));
+    
 
 
 

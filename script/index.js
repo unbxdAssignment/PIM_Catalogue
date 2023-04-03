@@ -96,7 +96,7 @@ window.onload = function () {
               let prod_container = document.getElementById("outer-div");
               prod_container.innerHTML = "";
               let filter = document.getElementById("sidebar");
-              
+              let logo_field = document.getElementById("logo");
               product=result["response"]["products"]
               numberOfProducts=result["response"]["numberOfProducts"]
               // let numProds=document.getElementById("numberOfProds");
