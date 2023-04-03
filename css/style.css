@@ -11,19 +11,20 @@ body {
   
   
   .sidebar {
-	background: linear-gradient(to bottom, #f9f2f2, #fbcdcd);
+	background: linear-gradient(to bottom, #ffffff, #E8D3FF);
 	color: #333131;
 	font-size: 16px;
 	margin: 0;
 	left: 0;
 	margin-top: 100px;
 	padding: 10px;
-	width: 250px;
-	height: 80%;
+	width: 228px;
+	height: 85%;
 	position: fixed;
 	overflow: auto;
 	display: block;
 	margin-bottom: 50px;
+	
 	/* bottom: 20px; */
   }
   
@@ -39,15 +40,19 @@ body {
   
   .sidebar a.active {
 	color: #000000;
-	align-items: center;
+	margin-left:-69% ;
 	text-decoration: none;
-	font-size: medium;
+	font-size: 20px;
+	font-family: 'sans-serif','verdana';
+	
 	
   }
+
   .sidebar li {
 	font-size: small;
 	position: relative; /* new */
 	bottom: 0; /* new */
+	font-family: 'sans-serif','verdana';
 }
   
   
@@ -90,15 +95,32 @@ body {
   }
 
   .grid {
-	display: grid;
-	margin-left: 220px; /* the width of the sidebar plus some spacing */
+    display: grid;
+    margin-left: 220px; /* the width of the sidebar plus some spacing */
     padding: 10px;
-	gap: 1px;
-	grid-template-columns: repeat(5, 1fr);
-	background-color:#ffffff;
-	padding-bottom: 10px;
-	margin-top: 9%;
-  }
+    gap: 1px;
+    grid-template-columns: repeat(5, 1fr);
+    background-color: #ffffff;
+    padding-bottom: 5px;
+    margin-top: 9%;
+}
+
+/* Target the first row */
+.grid > div:nth-child(-n+5) {
+    grid-row: 1 / 2; /* set the grid row to span the first row */
+    transform: scale(1.2); /* increase the size */
+}
+
+/* Add styles to all the columns on hover */
+.column:hover {
+    transform: scale(1.1);
+    border-radius: 5%;
+    margin-top: 25px;
+    transition: .5s;
+     /* add shadow on hover */
+}
+
+  
   .image{
 	margin: 10% auto 0% auto;
 	display: block;
@@ -111,7 +133,7 @@ body {
   
   .image_text{
 	text-transform: capitalize;
-	font-size: 14px;
+	font-size: 12px;
 	font-family: 'sans-serif','verdana';
 	text-align: left;
 	padding: 0% 25% 0% 28%;
@@ -121,7 +143,7 @@ body {
 	font-size: 14px;
 	font-family: 'fantasy','copperplate';
 	padding: 0% 25% 0% 28%;
-	color:#674188;
+	color:#35115c;
 	
   }
   .title{
@@ -137,15 +159,22 @@ body {
 	background-color:#F7EFE5 ;
 	border-radius: 5px;
   }
-   .column:hover{
-	transform:scale(1.1);
+  .column{
+	background-color: #ffffff80;
+	border-radius: 4%;
+	
+  }
+  .column:hover {
+	transform: scale(1.1);
 	border-radius: 5%;
 	margin-top: 25px;
-	transition:.5s;
-  } 
+	transition: .5s;
+	
+}
+
   
   	.image:hover{
-	box-shadow: rgba(25, 0, 255, 0.12) 0px 54px 55px, rgba(25, 0, 255, 0.12) 0px -12px 30px, rgba(25, 0, 255, 0.12) 0px 4px 6px, rgba(25, 0, 255, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+	box-shadow: rgba(96, 79, 255, 0.12) 0px 54px 55px, rgba(25, 0, 255, 0.12) 0px -12px 30px, rgba(25, 0, 255, 0.12) 0px 4px 6px, rgba(25, 0, 255, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 	transform: scale(1);
 	border-radius: 5%;
 	transition:.5s;
@@ -180,8 +209,9 @@ body {
   }
   
   .pagination button {
-	background-color: #4CAF50;
+	background-color: #C6CFFF;
 	border: none;
+	border-radius: 8%;
 	color: white;
 	padding: 10px 20px;
 	text-align: center;
@@ -190,10 +220,12 @@ body {
 	font-size: 16px;
 	margin: 4px 2px;
 	cursor: pointer;
-  }
+}
+
   
   .pagination button:hover {
-	background-color: #3e8e41;
+	background-color: #DEECFF;
+	
   }
   
   .pagination button:disabled {

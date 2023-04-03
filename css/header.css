@@ -1,6 +1,6 @@
 
   header {
-	background-color: #164d4d;
+	background-color: #ffffff;
 	color: #fff;
 	padding: 20px;
 	position: fixed;
@@ -17,7 +17,7 @@
 	padding: 10px;
   }
   .header-container-up {
-	background-color: #95adac;
+	background-color: #DEECFF;
 	border-radius: 10px;
 	display: flex;
 	justify-content: space-between;
@@ -31,6 +31,7 @@
 	align-items: center;
 	width: 50%;
 	justify-content: flex-end;
+	
   }
   
   .search-container input[type=text] {
@@ -40,10 +41,11 @@
 	border-radius: 10px;
 	width: 50%;
 	height: 100%;
+	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
   }
   
   .search-container button {
-	background-color: #4CAF50;
+	background-color: #FF0063;
 	color: #fff;
 	border: none;
 	border-radius: 10px;
@@ -54,7 +56,7 @@
   
   /* Subheader Styles */
   .subheader-container {
-	background-color: #f2f2f2;
+	background-color: #EAF6F6;
 	padding: 10px;
   }
   
@@ -74,3 +76,4 @@
 	color: #333;
 	text-decoration: none;
   }
+  

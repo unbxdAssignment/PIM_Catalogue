@@ -1,54 +1,177 @@
 <!DOCTYPE html>
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/header.css">
-<link rel="stylesheet" href="css/product.css">
-<link rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<!-- Declare document type as HTML -->
 <html lang="en">
 
-  <html>
-    <head>
-      <meta charset="UTF-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Template-01</title>
-    </head>
+<head>
+  <!-- Head section containing metadata for the document -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Template-01</title>
+  <!-- External stylesheets to be included -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/product.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+</head>
 
-    <body>
-      <header>
-        <div class="header-container-up">
-          <a class="active"><img src="logo-color.svg" width="150" height="90"
-              onclick="home()"></a>
-          <div class="search-container">
-            <input type="text" id="query" placeholder="Search for the products"
-              value="" oninput="debounceSearch()">
-
-          </div>
-        </div>
-      </header>
-
-      <div class="content">
-        
-        <div class="sidebar" id="sidebar">
-          <a class="active">Filters</a>
-        </div>
-
-        <div id="outer-div" class="grid">
-        </div>
-
+<body>
+  <!-- Body section of the document -->
+  <header>
+    <!-- Header section of the document -->
+    <div class="header-container-up">
+      <a class="active"><img src="logo-color.svg" width="150" height="90" onclick="home()"></a>
+      <div class="numberOfProds" id="numberOfProds"></div>
+      <div class="search-container">
+        <input type="text" id="query" placeholder="Search for the products" value="" oninput="debounceSearch()">
       </div>
-      <div class="pagination">
-        <button id="prev-page-btn" onclick="prevPage()">&laquo; Prev</button>
-        <span id="page-num" value=""></span>
-        <button id="next-page-btn" onclick="nextPage()">Next &raquo;</button>
-      </div>
+    </div>
+  </header>
+  
+  
+  
+  <div class="content">
+    
+    <!-- Main content section of the document -->
+    <div class="sidebar" id="sidebar">
+      <a class="active">Filters</a>
+    </div>
 
-      <!-- <footer class="footer">
-        <p>Footer</p>
-      </footer> -->
+    <div id="outer-div" class="grid">
+      <!-- Product grid to be populated dynamically -->
+      <div class="column">
+        <img class="image" src="loading.gif">
+        <p class="image_text">Product Name 1</p>
+        <p class="price">$19.99</p>
+      </div>
       
-    </body>
-    <script src="index.js"></script>
-    <script src="footer.js"></script>
+      <div class="column">
+        <img class="image" src="loading.gif">
+        <p class="image_text">Product Name 2</p>
+        <p class="price">$24.99</p>
+      </div>
+      
+      <div class="column">
+        <img class="image" src="loading.gif">
+        <p class="image_text">Product Name 3</p>
+        <p class="price">$14.99</p>
+      </div>
+      
+      <div class="column">
+        <img class="image" src="loading.gif">
+        <p class="image_text">Product Name 4</p>
+        <p class="price">$29.99</p>
+      </div>
+      
+      <div class="column">
+        <img class="image" src="loading.gif">
+        <p class="image_text">Product Name 5</p>
+        <p class="price">$9.99</p>
+      </div>
+      
+      <div class="column">
+        <img class="image" src="loading.gif">
+        <p class="image_text">Product Name 6</p>
+        <p class="price">$39.99</p>
+      </div>
+      
+      <div class="column">
+        <img class="image" src="loading.gif">
+        <p class="image_text">Product Name 7</p>
+        <p class="price">$49.99</p>
+      </div>
+      
+      <div class="column">
+        <img class="image" src="loading.gif">
+        <p class="image_text">Product Name 8</p>
+        <p class="price">$19.99</p>
+      </div>
+      
+      <div class="column">
+        <img class="image" src="loading.gif">
+        <p class="image_text">Product Name 9</p>
+        <p class="price">$12.99</p>
+      </div>
+      
+      <div class="column">
+        <img class="image" src="loading.gif">
+        <p class="image_text">Product Name 10</p>
+        <p class="price">$64.99</p>
+      </div>
+      <div class="column">
+        <img class="image" src="loading.gif">
+        <p class="image_text">Product Name 1</p>
+        <p class="price">$19.99</p>
+      </div>
+      
+      <div class="column">
+        <img class="image" src="loading.gif">
+        <p class="image_text">Product Name 2</p>
+        <p class="price">$24.99</p>
+      </div>
+      
+      <div class="column">
+        <img class="image" src="loading.gif">
+        <p class="image_text">Product Name 3</p>
+        <p class="price">$14.99</p>
+      </div>
+      
+      <div class="column">
+        <img class="image" src="loading.gif">
+        <p class="image_text">Product Name 4</p>
+        <p class="price">$29.99</p>
+      </div>
+      
+      <div class="column">
+        <img class="image" src="loading.gif">
+        <p class="image_text">Product Name 5</p>
+        <p class="price">$9.99</p>
+      </div>
+      
+      <div class="column">
+        <img class="image" src="loading.gif">
+        <p class="image_text">Product Name 6</p>
+        <p class="price">$39.99</p>
+      </div>
+      
+      <div class="column">
+        <img class="image" src="loading.gif">
+        <p class="image_text">Product Name 7</p>
+        <p class="price">$49.99</p>
+      </div>
+      
+      <div class="column">
+        <img class="image" src="loading.gif">
+        <p class="image_text">Product Name 8</p>
+        <p class="price">$19.99</p>
+      </div>
+      
+      <div class="column">
+        <img class="image" src="loading.gif">
+        <p class="image_text">Product Name 9</p>
+        <p class="price">$12.99</p>
+      </div>
+      
+      <div class="column">
+        <img class="image" src="loading.gif">
+        <p class="image_text">Product Name 10</p>
+        <p class="price">$64.99</p>
+      </div>
+      
+    </div>
+  </div>
 
-  </html>
+  <div class="pagination">
+    <!-- Pagination section for navigating through pages of products -->
+    <button id="prev-page-btn" onclick="prevPage()">&laquo; Prev</button>
+    <span id="page-num" value=""></span>
+    <button id="next-page-btn" onclick="nextPage()">Next &raquo;</button>
+  </div>
+
+  <!-- JavaScript files to be included -->
+  <script src="index.js"></script>
+  <script src="footer.js"></script>
+
+</body>
+
+</html>

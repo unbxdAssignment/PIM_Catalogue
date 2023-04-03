@@ -1,6 +1,6 @@
 let timerId;
 var pageNumber=1;
-let selectedValues = [];
+let selectedValues = localStorage.getItem('selectedValues') ? JSON.parse(localStorage.getItem('selectedValues')) : []; // load selectedValues from localStorage, or initialize as empty array
 
 
 function debounceSearch() {
@@ -19,7 +19,6 @@ function home(){
 
 
 function applyFilter(value,facetId) {
-  
   const filterString = `${facetId}:"${value}"`;
   const index = selectedValues.indexOf(filterString);
   if (index === -1) {
@@ -29,8 +28,8 @@ function applyFilter(value,facetId) {
   }
   let searchQuery = document.getElementById("query").value;
   window.parent.location=`index.html?q=${searchQuery}&facets=${selectedValues}&page=${pageNumber}`;
-  console.log(selectedValues);
-  console.log(selectedValues)
+  localStorage.setItem('selectedValues', JSON.stringify(selectedValues));
+  
 }
 
 
@@ -49,8 +48,12 @@ window.onload = function () {
   const urlParams = new URLSearchParams(queryString);
   let prod_query = urlParams.get('q');
   let pageNumber = urlParams.get('page');
-  let filterList = []
-  filterList= urlParams.get('facets');
+  let filterList= urlParams.get('facets');
+  let filterArray = filterList.split(",");
+  console.log(filterArray)
+  
+  
+
 
   const mySpan = document.getElementById("page-num");
   mySpan.textContent = pageNumber;
@@ -75,10 +78,10 @@ window.onload = function () {
   var raw = JSON.stringify({
     "page": pageNumber,
     "count": 20,
-    "facet_filters": [filterList],
+    "facet_filters": filterArray,
     "search_str": prod_query
   });
-  console.log(filterList)
+  
 
   var requestOptions = {
     method: 'POST',
@@ -91,15 +94,19 @@ window.onload = function () {
     .then(response => response.json())
     .then(result => {
               let prod_container = document.getElementById("outer-div");
+              prod_container.innerHTML = "";
               let filter = document.getElementById("sidebar");
-        
+              
               product=result["response"]["products"]
               numberOfProducts=result["response"]["numberOfProducts"]
+              // let numProds=document.getElementById("numberOfProds");
+              // numProds.innerHTML +=`<p>Showing results for ${numberOfProducts} products...`
               document.getElementById("page-num").value = numberOfProducts;
               console.log(result["response"]["numberOfProducts"])
+              
               for (let i = 0; i < product.length; i++) {
                   
-                  prod_container.innerHTML += `<div class="column"  >
+                  prod_container.innerHTML += `<div class="column"  onclick="window.open('product.html?uid=${product[i]['uniqueId']}','_self')">
                   <img class="image" src="${product[i]['productImage']}">
                   <p class="image_text">${product[i]['productName']}</p>
                   <p class="price">${product[i]['uniqueId']}</p>
@@ -114,14 +121,17 @@ window.onload = function () {
                 const { displayName } = result.facets[facetId];
                 const {values} = result.facets[facetId];
                 filter.innerHTML += `
+                <hr>
                   <h6>${displayName}</h6>
                   <ul>
                 `;
                 for (let i = 0; i < values.length; i += 2) {
+                  const isChecked = filterArray.includes(`${facetId}:"${values[i]}"`);
+                  console.log(isChecked)
                   filter.innerHTML += `
                     <li>
                       <label>
-                        <input type="checkbox" id="filter-checkbox" name="${values[i]}" value="${values[i]}" onclick="applyFilter('${values[i]}','${facetId}')">
+                        <input type="checkbox" id="filter-checkbox" name="${values[i]}" value="${values[i]}" onclick="applyFilter('${values[i]}','${facetId}')" ${isChecked ? 'checked' : ''}>
                         ${values[i]} (${values[i + 1]})
                       </label>
                     </li>
