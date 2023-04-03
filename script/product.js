@@ -82,22 +82,23 @@ window.onload = function () {
                 <p class="image_title">${product['productName']}</p>
                 <p class="price"><sup id="sup_price">$</sup>${displayPrice}<sup id="sup_price">${decimal}</sup></p>
                 <p class="image_body">Quanitity : ${product['field_485']}</p>
-                <p class="return_policy"> UniqueID : ${product["uniqueId"]}</p>
-                <p class="return_policy">Parent ID :${product['parentId']}</p>
-                <p class="return_policy">Updated On :${product['updated_at']}</p>
-                <p class="return_policy">Product Status :${product['product_status']}</p>   
+                <p > UniqueID : ${product["uniqueId"]}</p>
+                <p >Parent ID :${product['parentId']}</p>
+                <p >Updated On :${product['updated_at']}</p>
+                <p >Product Status :${product['product_status']}</p>   
             </div>
 
             <div class="column3">
             <p class="image_body">${product['field_476']}</p>
             </div>
-            <div class="column3" id="more_info">
+            <div class="column4" id="more_info">
+            <h4> More Information </h4>
             </div>
             `
             for (const fieldId in dictionary) {
                 let more_info=document.getElementById("more_info");
-                if(fieldId.includes("field")){
-                    more_info.innerHTML +=`<p class="image_body">${dictionary[fieldId].name} : ${product[fieldId]}</p>`
+                if(fieldId.includes("field") && product[fieldId]!==undefined){
+                    more_info.innerHTML +=`<p class="info">${dictionary[fieldId].name} : ${product[fieldId]}</p>`
                 }
             }
             
