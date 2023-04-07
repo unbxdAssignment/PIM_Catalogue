@@ -119,17 +119,17 @@ window.onload = function () {
                 <hr class="pdpBreaker" >
                 <p class="product-title">${product['productName']}</p>
                 <hr class="pdpBreaker" >
-                <p >Price : &#8377;${displayPrice}.${decimal}</sup></p>
+                <p class="info">Price : &#8377;${displayPrice}.${decimal}</sup></p>
                 <hr>
-                <p>Quanitity : ${product['field_485']}</p>
+                <p class="info">Quanitity : ${product['field_485']}</p>
                 <hr>
-                <p >UniqueID : ${product["uniqueId"]}</p>
+                <p class="info">UniqueID : ${product["uniqueId"]}</p>
                 <hr>
-                <p >Parent ID : ${product['parentId']}</p>
+                <p class="info">Parent ID : ${product['parentId']}</p>
                 <hr>
-                <p >Updated On : ${product['updated_at']}</p>
+                <p class="info">Updated On : ${product['updated_at']}</p>
                 <hr>
-                <p >Product Status : ${product['product_status']}</p>   
+                <p class="info">Product Status : ${product['product_status']}</p>   
                 <hr class="pdpBreaker" >
             </div>
 

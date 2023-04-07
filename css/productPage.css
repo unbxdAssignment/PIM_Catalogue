@@ -34,12 +34,14 @@
   font-stretch: condensed;
   padding: 5px;
   font-family: Sans-Serif;
+  font-weight: 300;
 }
 
 .info {
   font-size: 16px;
   font-family: Sans-Serif;
   padding: 5px;
+  font-weight: 300;
 }
 
 .image:hover {
@@ -108,6 +110,7 @@
   border-bottom-right-radius: 20px;
   border-bottom-left-radius: 20px;
   font-family: Sans-Serif;
+  box-shadow: 0 0 3px 1px rgb(53, 53, 53);
   /* border: 1px solid rgb(216, 216, 216); */
 }
 .col3 {
@@ -125,6 +128,7 @@
   border-bottom-left-radius: 20px;
   font-family: Sans-Serif;
   color: whitesmoke;
+  box-shadow: 0 0 3px 1px rgb(53, 53, 53);
 }
 
 .col4 {
@@ -144,4 +148,5 @@
   border-top-left-radius: 20px;
   border-bottom-right-radius: 20px;
   border-bottom-left-radius: 20px;
+  box-shadow: 0 0 3px 1px rgb(53, 53, 53);
 }

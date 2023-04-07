@@ -108,7 +108,7 @@ window.onload = function () {
               const {response:{numberOfProducts : numberOfProducts=0 }={}} = result
 
               
-              filter.innerHTML +=`<p class ="facet-header">Showing results for ${numberOfProducts} products...`
+              filter.innerHTML +=`<p class ="facet-header">Showing results for <b class="prod-count">${numberOfProducts}</b> products...`
               document.getElementById("page-num").value = numberOfProducts;
               
               
