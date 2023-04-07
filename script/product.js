@@ -3,14 +3,7 @@ var pageNumber = 1;
 let selectedValues = [];
 
 
-function debounceSearch() {
-    clearTimeout(timerId);
-    timerId = setTimeout(() => {
-      const { value: searchQuery = '' } = document.getElementById("query") || {};
-      selectedValues = [];
-      window.parent.location=`index.html?q=${searchQuery}&facets=${selectedValues}&page=${pageNumber}`;
-    }, 300); // add a delay of 1500 milliseconds
-  }
+
 
 
 function home() {
@@ -110,7 +103,7 @@ window.onload = function () {
             let price = product['field_390']+".00" || "";
             let decimal = (parseFloat(price).toFixed(2)).slice(-2) || "";
             let displayPrice = String(parseInt(price)) || "";
-
+            prod_container.innerHTML ="";
             prod_container.innerHTML += `
             <div class="col1">
                 <img class="image" src="${product['productImage']}">

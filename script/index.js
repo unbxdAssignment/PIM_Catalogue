@@ -10,10 +10,11 @@ function debounceSearch() {
     const { value: searchQuery = '' } = document.getElementById("query") || {};
     selectedValues = [];
     window.parent.location=`index.html?q=${searchQuery}&facets=${selectedValues}&page=${pageNumber}`;
-  }, 1000); // add a delay of 1500 milliseconds
+  }, 300); // add a delay of 1500 milliseconds
 }
 
 function reset(){
+  
   selectedValues = [];
   const { value: searchQuery = '' } = document.getElementById("query") || {};
   localStorage.setItem('selectedValues', JSON.stringify(selectedValues));
@@ -24,6 +25,13 @@ function home(){
   localStorage.setItem('selectedValues', JSON.stringify(selectedValues));
   window.parent.location=`index.html?q=&facets=${selectedValues}&page=${pageNumber}`;
   
+}
+
+function resetFilters(){
+
+  let reset = document.getElementById("reset");
+  reset.innerHTML += `<button type="button" class="button-reset" onclick=reset()>Reset</button>
+  <hr class = "facet-list"></hr>`
 }
 
 
@@ -43,7 +51,7 @@ function applyFilter(value,facetId) {
 
 
 const urlParams = new URLSearchParams(window.location.search);
-const {searchQuery = ""} = urlParams.get("q") || "";
+let searchQuery  = urlParams.get("q") || "";
 
 // Set the initial value of the search input field to the search query parameter
 if (searchQuery) {
@@ -58,6 +66,10 @@ window.onload = function () {
   let prod_query = urlParams.get('q') || "";
   let pageNumber = urlParams.get('page') || 1;
   let filterList= urlParams.get('facets') || ""; //problem with split
+
+  if(filterList!=""){
+    resetFilters()
+  }
   let filterArray = filterList.split(",");
   console.log(filterArray)
   
