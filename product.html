@@ -1,19 +1,13 @@
 <!DOCTYPE html>
-<!-- The doctype declaration specifies that this is an HTML document. -->
+
 <link rel="stylesheet" href="css/style.css">
-<!-- This links to an external CSS stylesheet for general styling. -->
 <link rel="stylesheet" href="css/header.css">
-<!-- This links to an external CSS stylesheet for header styling. -->
 <link rel="stylesheet" href="css/productPage.css">
-<!-- This links to an external CSS stylesheet for product page styling. -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-<!-- This links to an external CSS stylesheet for Bootstrap, a popular CSS framework. -->
 <html lang="en">
-<!-- The html tag specifies the root element of the document, and the lang attribute specifies the language of the document. -->
+
 
 <html>
-<!-- This line is redundant and can be removed. -->
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,20 +16,17 @@
     <!-- The head section includes metadata and the title of the document. -->
 </head>
 
-<body>
-    <header>
-        <!-- This section contains the header for the page. -->
+<body class="product-body">
+    <header class="header-container-main">
+        <!-- Header section of the document -->
         <div class="header-container-up">
-            <!-- This div contains the top portion of the header. -->
-            <a class="active"><img src="http://unbxd-pimento.s3.amazonaws.com/e17f1f63216d021d5fcbd7933c311b72/org/1678693343113_1670492620095_download%20copy%203.png" width="150" height="90" onclick="home()"></a>
-            <!-- This link contains the logo image for the page. -->
-            <div class="search-container">
-                <!-- This div contains the search bar for the page. -->
-                <input type="text" id="query" placeholder="Search for the products" value="" oninput="debounceSearch()">
-                <!-- This is the search input element. -->
-            </div>
+            <img id="logo" class="header-img" src="http://unbxd-pimento.s3.amazonaws.com/e17f1f63216d021d5fcbd7933c311b72/org/1678693343113_1670492620095_download%20copy%203.png" width="150" height="90" onclick="home()" >
+            <div class="numberOfProds" id="numberOfProds"></div>
+          <div class="search-container">
+            <input type="text"  class ="search-input" id="query" placeholder="Search for the products" value="" oninput="debounceSearch()">
+          </div>
         </div>
-    </header>
+      </header>
 
 
     <div id="row">
@@ -45,6 +36,4 @@
 </body>
 <script src="script/product.js"></script>
 <!-- This script file contains JavaScript code for the product page. -->
-
-
 </html>

@@ -3,19 +3,28 @@ var pageNumber=1;
 let selectedValues = localStorage.getItem('selectedValues') ? JSON.parse(localStorage.getItem('selectedValues')) : []; // load selectedValues from localStorage, or initialize as empty array
 
 
+
 function debounceSearch() {
   clearTimeout(timerId);
   timerId = setTimeout(() => {
-    let searchQuery = document.getElementById("query").value;
+    const { value: searchQuery = '' } = document.getElementById("query") || {};
     selectedValues = [];
     window.parent.location=`index.html?q=${searchQuery}&facets=${selectedValues}&page=${pageNumber}`;
   }, 1000); // add a delay of 1500 milliseconds
 }
+
+function reset(){
+  selectedValues = [];
+  const { value: searchQuery = '' } = document.getElementById("query") || {};
+  localStorage.setItem('selectedValues', JSON.stringify(selectedValues));
+  window.parent.location=`index.html?q${searchQuery}=&facets=${selectedValues}&page=${pageNumber}`;
+}
 function home(){
   selectedValues = [];
+  localStorage.setItem('selectedValues', JSON.stringify(selectedValues));
   window.parent.location=`index.html?q=&facets=${selectedValues}&page=${pageNumber}`;
+  
 }
-
 
 
 function applyFilter(value,facetId) {
@@ -26,7 +35,7 @@ function applyFilter(value,facetId) {
   } else {
     selectedValues.splice(index, 1);
   }
-  let searchQuery = document.getElementById("query").value;
+  const { value: searchQuery = '' } = document.getElementById("query") || {};
   window.parent.location=`index.html?q=${searchQuery}&facets=${selectedValues}&page=${pageNumber}`;
   localStorage.setItem('selectedValues', JSON.stringify(selectedValues));
   
@@ -34,7 +43,7 @@ function applyFilter(value,facetId) {
 
 
 const urlParams = new URLSearchParams(window.location.search);
-const searchQuery = urlParams.get("q");
+const {searchQuery = ""} = urlParams.get("q") || "";
 
 // Set the initial value of the search input field to the search query parameter
 if (searchQuery) {
@@ -46,18 +55,14 @@ window.onload = function () {
 
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-  let prod_query = urlParams.get('q');
-  let pageNumber = urlParams.get('page');
-  let filterList= urlParams.get('facets');
+  let prod_query = urlParams.get('q') || "";
+  let pageNumber = urlParams.get('page') || 1;
+  let filterList= urlParams.get('facets') || ""; //problem with split
   let filterArray = filterList.split(",");
   console.log(filterArray)
   
-  
-
-
-  const mySpan = document.getElementById("page-num");
+  let mySpan = document.getElementById("page-num");
   mySpan.textContent = pageNumber;
-  // console.log(prod_query)
   var myHeaders = new Headers();
   myHeaders.append("Accept", "*/*");
   myHeaders.append("Accept-Language", "en-GB,en-US;q=0.9,en;q=0.8");
@@ -97,15 +102,18 @@ window.onload = function () {
               prod_container.innerHTML = "";
               let filter = document.getElementById("sidebar");
               let logo_field = document.getElementById("logo");
-              product=result["response"]["products"]
-              numberOfProducts=result["response"]["numberOfProducts"]
-              // let numProds=document.getElementById("numberOfProds");
-              // numProds.innerHTML +=`<p>Showing results for ${numberOfProducts} products...`
+              const {response: { products: product = [] }={} } = result
+              
+              console.log(product)
+              const {response:{numberOfProducts : numberOfProducts=0 }={}} = result
+
+              
+              filter.innerHTML +=`<p class ="facet-header">Showing results for ${numberOfProducts} products...`
               document.getElementById("page-num").value = numberOfProducts;
-              console.log(result["response"]["numberOfProducts"])
+              
               
               for (let i = 0; i < product.length; i++) {
-                  
+            
                   prod_container.innerHTML += `<div class="column"  onclick="window.open('product.html?uid=${product[i]['uniqueId']}','_self')">
                   <img class="image" src="${product[i]['productImage']}">
                   <p class="image_text">${product[i]['productName']}</p>
@@ -121,16 +129,15 @@ window.onload = function () {
                 const { displayName } = result.facets[facetId];
                 const {values} = result.facets[facetId];
                 filter.innerHTML += `
-                <hr>
-                  <h6>${displayName}</h6>
+                <hr class = "facets-line">
+                  <h6 class="facet-header">${displayName}</h6>
                   <ul>
                 `;
                 for (let i = 0; i < values.length; i += 2) {
                   const isChecked = filterArray.includes(`${facetId}:"${values[i]}"`);
-                  console.log(isChecked)
                   filter.innerHTML += `
-                    <li>
-                      <label>
+                    <li class="facet-list">
+                      <label >
                         <input type="checkbox" id="filter-checkbox" name="${values[i]}" value="${values[i]}" onclick="applyFilter('${values[i]}','${facetId}')" ${isChecked ? 'checked' : ''}>
                         ${values[i]} (${values[i + 1]})
                       </label>
@@ -140,7 +147,9 @@ window.onload = function () {
               }
           })
       
-    .catch(error => console.log('error', error));
+          .catch(error => {
+            alert('An error has occurred: ' + error.message);
+          });
         }
 
 

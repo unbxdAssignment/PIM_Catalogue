@@ -1,14 +1,36 @@
-// Declare variables for timer, page number, and selected values
 let timerId;
 var pageNumber = 1;
 let selectedValues = [];
 
-// Define function for navigating to home page with selected values and page number
+
+function debounceSearch() {
+    clearTimeout(timerId);
+    timerId = setTimeout(() => {
+      const { value: searchQuery = '' } = document.getElementById("query") || {};
+      selectedValues = [];
+      window.parent.location=`index.html?q=${searchQuery}&facets=${selectedValues}&page=${pageNumber}`;
+    }, 300); // add a delay of 1500 milliseconds
+  }
+
+
 function home() {
-  // Reset selected values
   selectedValues = [];
-  // Navigate to home page with updated selected values and page number
+  localStorage.setItem('selectedValues', JSON.stringify(selectedValues));
   window.parent.location = `index.html?q=&facets=${selectedValues}&page=${pageNumber}`;
+}
+
+function safeTraverse(obj, paths = []) {
+    let val = obj;
+    let idx = 0;
+
+    while (idx < paths.length) {
+        if (!val) {
+            return null;
+        }
+        val = val[paths[idx]];
+        idx++;
+    }
+    return val === 0 ? '0' : val;
 }
 
 
@@ -49,15 +71,27 @@ window.onload = function () {
     fetch("https://pim.unbxd.io/api/v1/catalogueConfig/6391b1448f93e67002742cef", requestOptions01)
   .then(response => response.json())
   .then(result => {
-    data=result["data"];
-    
+
+    let data =result["data"] || {};
+
     const dictionary = {};
+    const relatedFields = {};
+
     for (const property of data.properties) {
-    dictionary[property.field_id] = {
-        name: property.name,
-        group: property.group,
+        dictionary[property.field_id] = {
+            name: property.name,
+            group: property.group,
         };
+            
+        const propertyName = property.group
+
+        if (relatedFields[propertyName]) {
+            relatedFields[propertyName].push(property.field_id);
+        } else {
+            relatedFields[propertyName] = [property.field_id];
+        }
     }
+
 
     var requestOptions02 = {
         method: 'POST',
@@ -69,48 +103,85 @@ window.onload = function () {
         fetch("https://pim.unbxd.io/peppercorn/api/v2/catalogueProduct", requestOptions02)
         .then(response => response.json())
         .then(result => {
+
             let prod_container = document.getElementById("row");
-            product=result["data"]["response"]["products"][0]
+            product = safeTraverse(result, ['data', 'response', 'products', '0']) || {};
             
-            let price = product['field_390']+".00";
-            let decimal = (parseFloat(price).toFixed(2)).slice(-2);
-            let displayPrice = String(parseInt(price));
-            prod_container.innerHTML += `<div class="column1">
+            let price = product['field_390']+".00" || "";
+            let decimal = (parseFloat(price).toFixed(2)).slice(-2) || "";
+            let displayPrice = String(parseInt(price)) || "";
+
+            prod_container.innerHTML += `
+            <div class="col1">
                 <img class="image" src="${product['productImage']}">
             </div>
-            <div class="column2">
-                <p class="image_title">${product['productName']}</p>
-                <p class="price"><sup id="sup_price">$</sup>${displayPrice}<sup id="sup_price">${decimal}</sup></p>
-                <p class="image_body">Quanitity : ${product['field_485']}</p>
-                <p > UniqueID : ${product["uniqueId"]}</p>
-                <p >Parent ID :${product['parentId']}</p>
-                <p >Updated On :${product['updated_at']}</p>
-                <p >Product Status :${product['product_status']}</p>   
+            <div class="col2">
+                <hr class="pdpBreaker" >
+                <p class="product-title">${product['productName']}</p>
+                <hr class="pdpBreaker" >
+                <p >Price : &#8377;${displayPrice}.${decimal}</sup></p>
+                <hr>
+                <p>Quanitity : ${product['field_485']}</p>
+                <hr>
+                <p >UniqueID : ${product["uniqueId"]}</p>
+                <hr>
+                <p >Parent ID : ${product['parentId']}</p>
+                <hr>
+                <p >Updated On : ${product['updated_at']}</p>
+                <hr>
+                <p >Product Status : ${product['product_status']}</p>   
+                <hr class="pdpBreaker" >
             </div>
 
-            <div class="column3">
+            <div class="col3">
+            <p class="column-heading">Description</p>
+            <hr class="pdpBreaker">
             <p class="image_body">${product['field_476']}</p>
             </div>
-            <div class="column4" id="more_info">
-            <h4> More Information </h4>
+            <div class="col4" id="more_info">
+            <p class="column-heading">More Information</p>
+            
             </div>
             `
-            for (const fieldId in dictionary) {
+
+            for (let groupName in relatedFields ){
+                
+                const groupFields = relatedFields[groupName];
+
+                if (groupName === 'Properties without any group'){
+                    groupName = "Other Details"
+                }
+                let count=0 
                 let more_info=document.getElementById("more_info");
-                if(fieldId.includes("field") && product[fieldId]!==undefined){
-                    more_info.innerHTML +=`<p class="info">${dictionary[fieldId].name} : ${product[fieldId]}</p>`
+
+                more_info.innerHTML +=`<hr class="pdpBreaker"><p class="column-heading-inner">${groupName}</p>`
+                
+                console.log(groupFields)
+
+                for (const fieldId of groupFields) {
+                    
+                    if(fieldId.includes("field") && product[fieldId]!==undefined && fieldId!="field_476"){
+                        more_info.innerHTML +=`<p class="info">${dictionary[fieldId].name} : ${product[fieldId]}</p>`
+                        count++;
+                        
+                    }
+                    else if(product[fieldId]!==undefined && fieldId!="field_476"){
+                        more_info.innerHTML +=`<p class="info">${fieldId} : ${product[fieldId]}</p>`
+                        count++
+                    }
+                    
+                }
+                if(count==0){
+                    more_info.innerHTML +=`<p class="info">No properties in this group</p>`
                 }
             }
             
         })
-        .catch(error => console.log('error', error));
+        .catch(error => {
+            alert('An error has occurred: ' + error.message);
+          });
   })
-  .catch(error => console.log('error', error));
-    
-
-
-    
-
-
-
+  .catch(error => {
+    alert('An error has occurred: ' + error.message);
+  });
 }
