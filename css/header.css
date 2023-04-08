@@ -42,7 +42,7 @@
 
 .search-input {
   padding: 10px;
-  margin-right: 24px;
+  margin-right:24px;
   border: none;
   border-radius: 14px;
   width: 50%;
@@ -56,7 +56,11 @@
   /* border-style:groove; */
   border-width: 1px;
   box-shadow: 0 0 4px 1px rgb(76, 76, 76);
+  
 }
+
+
+
 
 .header-img {
   margin-left: 9px;

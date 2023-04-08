@@ -154,12 +154,12 @@ window.onload = function () {
                 for (const fieldId of groupFields) {
                     
                     if(fieldId.includes("field") && product[fieldId]!==undefined && fieldId!="field_476"){
-                        more_info.innerHTML +=`<p class="info">${dictionary[fieldId].name} : ${product[fieldId]}</p>`
+                        more_info.innerHTML +=`<p class="info"><b>${dictionary[fieldId].name}</b> : ${product[fieldId]}</p>`
                         count++;
                         
                     }
                     else if(product[fieldId]!==undefined && fieldId!="field_476"){
-                        more_info.innerHTML +=`<p class="info">${fieldId} : ${product[fieldId]}</p>`
+                        more_info.innerHTML +=`<p class="info"><b>${fieldId}</b> : ${product[fieldId]}</p>`
                         count++
                     }
                     

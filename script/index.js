@@ -14,7 +14,6 @@ function debounceSearch() {
 }
 
 function reset(){
-  
   selectedValues = [];
   const { value: searchQuery = '' } = document.getElementById("query") || {};
   localStorage.setItem('selectedValues', JSON.stringify(selectedValues));
