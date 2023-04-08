@@ -59,8 +59,24 @@
   
 }
 
-
-
+.back-btn{
+  margin-left: 15px;
+  cursor: pointer;
+  background-color: #535353;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  padding: 5px 10px;
+  
+  font-size: 14px;
+  cursor: pointer;
+  font-family: Sans-Serif;
+ 
+  font-weight: 300;
+}
+.back-btn:hover {
+  background-color: #ff7272;
+}
 
 .header-img {
   margin-left: 9px;

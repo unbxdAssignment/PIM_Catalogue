@@ -1,15 +1,13 @@
 let timerId;
 var pageNumber = 1;
-let selectedValues = [];
-
-
-
+let selectedValues = localStorage.getItem('selectedValues') ? JSON.parse(localStorage.getItem('selectedValues')) : [];
 
 
 function home() {
-  selectedValues = [];
-  localStorage.setItem('selectedValues', JSON.stringify(selectedValues));
-  window.parent.location = `index.html?q=&facets=${selectedValues}&page=${pageNumber}`;
+    selectedValues = localStorage.getItem('selectedValues') ? JSON.parse(localStorage.getItem('selectedValues')) : [];
+     // load selectedValues from localStorage, or initialize as empty array
+    localStorage.setItem('selectedValues', JSON.stringify(selectedValues));
+    window.parent.location = `index.html?q=&facets=${selectedValues}&page=${pageNumber}`;
 }
 
 function safeTraverse(obj, paths = []) {
@@ -25,6 +23,8 @@ function safeTraverse(obj, paths = []) {
     }
     return val === 0 ? '0' : val;
 }
+
+  
 
 
 
@@ -106,7 +106,7 @@ window.onload = function () {
             prod_container.innerHTML ="";
             prod_container.innerHTML += `
             <div class="col1">
-                <img class="image" src="${product['productImage']}">
+                <img class="image" src="${product['productImage']}" onclick="window.open('${product['productImage']}','_blank')" >
             </div>
             <div class="col2">
                 <hr class="pdpBreaker" >

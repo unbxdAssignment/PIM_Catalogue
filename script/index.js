@@ -125,7 +125,7 @@ window.onload = function () {
               
               for (let i = 0; i < product.length; i++) {
             
-                  prod_container.innerHTML += `<div class="column"  onclick="window.open('product.html?uid=${product[i]['uniqueId']}','_self')">
+                  prod_container.innerHTML += `<div class="column"  onclick="window.open('product.html?uid=${product[i]['uniqueId']}','_blank')">
                   <img class="image" src="${product[i]['productImage']}">
                   <p class="image_text">${product[i]['productName']}</p>
                   <p class="price">${product[i]['uniqueId']}</p>
