@@ -139,8 +139,9 @@ window.onload = function () {
               for (const facetId of facetIds) {
                 const { displayName } = result.facets[facetId];
                 const {values} = result.facets[facetId];
-                filter.innerHTML += `
-                <hr class = "facets-line">
+                if(values.length>0){
+                  filter.innerHTML += `
+                  <hr class = "facets-line">
                   <h6 class="facet-header">${displayName}</h6>
                   <ul>
                 `;
@@ -155,6 +156,9 @@ window.onload = function () {
                     </li>
                   `;
                 }
+
+                }
+                
               }
           })
       

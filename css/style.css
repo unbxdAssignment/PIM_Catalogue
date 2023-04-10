@@ -66,6 +66,9 @@
   margin: 0 auto;
   font-weight: 300;
 }
+.button-reset:hover{
+  background-color: #ff7272;
+}
 
 .facet-list {
   position: relative; /* new */

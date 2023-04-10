@@ -104,6 +104,7 @@ window.onload = function () {
             let decimal = (parseFloat(price).toFixed(2)).slice(-2) || "";
             let displayPrice = String(parseInt(price)) || "";
             prod_container.innerHTML ="";
+            
             prod_container.innerHTML += `
             <div class="col1">
                 <img class="image" src="${product['productImage']}" onclick="window.open('${product['productImage']}','_blank')" >
@@ -112,24 +113,21 @@ window.onload = function () {
                 <hr class="pdpBreaker" >
                 <p class="product-title">${product['productName']}</p>
                 <hr class="pdpBreaker" >
-                <p class="info">Price : &#8377;${displayPrice}.${decimal}</sup></p>
-                <hr>
-                <p class="info">Quanitity : ${product['field_485']}</p>
-                <hr>
-                <p class="info">UniqueID : ${product["uniqueId"]}</p>
-                <hr>
-                <p class="info">Parent ID : ${product['parentId']}</p>
-                <hr>
-                <p class="info">Updated On : ${product['updated_at']}</p>
-                <hr>
-                <p class="info">Product Status : ${product['product_status']}</p>   
+                ${!isNaN(displayPrice) ? `<p class="info">Price : &#8377;${displayPrice}.${decimal}</sup></p>` : '' }  
+                ${product['field_485'] ? `<hr>
+                <p class="info">Quanitity : ${product['field_485']}</p>` : ''}
+                ${product['uniqueId'] ? `<hr>
+                <p class="info">UniqueID : ${product["uniqueId"]}</p>` : ''}
+                ${product['parentId'] ? `<hr>
+                <p class="info">Parent ID : ${product['parentId']}</p>` : ''}
+                ${product['updated_at'] ? `<hr>
+                <p class="info">Updated On : ${product['updated_at']}</p>` : ''}
+                ${product['product_status'] ? `<hr>
+                <p class="info">Product Status : ${product['product_status']}</p>` : ''}
                 <hr class="pdpBreaker" >
             </div>
-
-            <div class="col3">
-            <p class="column-heading">Description</p>
-            <hr class="pdpBreaker">
-            <p class="image_body">${product['field_476']}</p>
+            
+            ${product['field_476'] ? '<div class="col3">' + '<p class="column-heading">Description</p>' + '<hr class="pdpBreaker">' + '<p class="image_body">' + product['field_476'] + '</p><hr>' : ''}
             </div>
             <div class="col4" id="more_info">
             <p class="column-heading">More Information</p>
