@@ -97,7 +97,7 @@ window.onload = function () {
         .then(response => response.json())
         .then(result => {
 
-            let prod_container = document.getElementById("row");
+            let prod_container = document.getElementById("product-content");
             product = safeTraverse(result, ['data', 'response', 'products', '0']) || {};
             
             let price = product['field_390']+".00" || "";

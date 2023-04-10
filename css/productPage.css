@@ -74,7 +74,7 @@
   border-radius: 5%;
 }
 
-.row:after {
+.product-content:after {
   content: '';
   display: table;
   clear: both;
@@ -151,3 +151,5 @@
   border-bottom-left-radius: 20px;
   box-shadow: 0 0 3px 1px rgb(53, 53, 53);
 }
+
+
