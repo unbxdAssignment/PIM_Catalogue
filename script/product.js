@@ -27,8 +27,52 @@ function setLogo(logo){
     let logo_field = document.getElementById("logo");
         logo_field.setAttribute("src", logo);
 }
-  
 
+let currentImage=null;
+
+function setImage(imageUrl, clickedImage){
+    let pdpImage = document.getElementById("pdp-image");
+    pdpImage.setAttribute("src",imageUrl);
+
+    if (currentImage !== null) {
+        currentImage.style.transform = "scale(1)";
+        currentImage.style.boxShadow = "none";
+    }
+    
+    // set the scale of the clicked image to 1.2
+    clickedImage.style.transform = "scale(1.2)";
+
+    // set the currentImage variable to the clicked image
+    currentImage = clickedImage;
+
+    clickedImage.style.transform = "scale(1.2)"; // increase the scale by 20%
+    clickedImage.style.boxShadow =
+    "rgba(96, 79, 255, 0.12) 0px 54px 55px, " +
+    "rgba(25, 0, 255, 0.12) 0px -12px 30px, " +
+    "rgba(25, 0, 255, 0.12) 0px 4px 6px, " +
+    "rgba(25, 0, 255, 0.17) 0px 12px 13px, " +
+    "rgba(0, 0, 0, 0.09) 0px -3px 5px";;
+}
+
+function pdpImage(allimages){
+    
+    let pdpPreview = document.getElementById("pdp-preview");
+    if(allimages.length==1){
+        pdpPreview.style.display="None";
+        
+    }
+    else{
+      
+        for( let i=0; i < allimages.length;i++){
+            pdpPreview.innerHTML +=`
+            <img class="image-review" src=${allimages[i]} onclick=setImage('${allimages[i]}',this)>
+            `    
+    }
+     
+    }
+    setImage(allimages[0], document.querySelectorAll('.image-review')[0]);
+    
+}
 
 
 window.onload = function () {
@@ -88,6 +132,7 @@ window.onload = function () {
         }
     }
 
+    
 
     var requestOptions02 = {
         method: 'POST',
@@ -110,26 +155,29 @@ window.onload = function () {
             
             prod_container.innerHTML += `
             <div class="col1">
-            <img class="image" src="${product['productImage'] ? product['productImage'] : 'images/coming-soon.webp'}" onclick="window.open('${product['productImage']}','_blank')" >
+                <img class="image" id="pdp-image" src="${product['productImage'][0] ? product['productImage'][0] : 'images/coming-soon.webp'}" onclick="window.open('${product['productImage']}','_blank')" >
             </div>
             <div class="col2">
                 <hr class="pdpBreaker" >
                 <p class="product-title">${product['productName']}</p>
                 <hr class="pdpBreaker" >
-                ${!isNaN(displayPrice) ? `<p class="info">Price : &#8377;${displayPrice}.${decimal}</sup></p>` : '' }  
+                ${!isNaN(displayPrice) ? `<p class="info">${dictionary['field_390'].name} : &#8377;${displayPrice}.${decimal}</sup></p>` : '' }  
                 ${product['field_485'] ? `<hr>
-                <p class="info">Quanitity : ${product['field_485']}</p>` : ''}
+                <p class="info">${dictionary['field_485'].name} : ${product['field_485']}</p>` : ''}
                 ${product['uniqueId'] ? `<hr>
-                <p class="info">UniqueID : ${product["uniqueId"]}</p>` : ''}
+                <p class="info">${dictionary['uniqueId'].name} : ${product["uniqueId"]}</p>` : ''}
                 ${product['parentId'] ? `<hr>
-                <p class="info">Parent ID : ${product['parentId']}</p>` : ''}
+                <p class="info">${dictionary['parentId'].name} : ${product['parentId']}</p>` : ''}
                 ${product['updated_at'] ? `<hr>
                 <p class="info">Updated On : ${product['updated_at']}</p>` : ''}
                 ${product['product_status'] ? `<hr>
                 <p class="info">Product Status : ${product['product_status']}</p>` : ''}
                 <hr class="pdpBreaker" >
             </div>
-            
+            <div class="col5" id="pdp-preview">
+                <p class="column-heading">Images</p>
+                <hr class="pdpBreaker">
+            </div>
             ${product['field_476'] ? '<div class="col3">' + '<p class="column-heading">Description</p>' + '<hr class="pdpBreaker">' + '<p class="image_body">' + product['field_476'] + '</p><hr>' : ''}
             </div>
             <div class="col4" id="more_info">
@@ -137,7 +185,9 @@ window.onload = function () {
             
             </div>
             `
+            pdpImage(product['productImage'])
 
+            
             for (let groupName in relatedFields ){
                 
                 const groupFields = relatedFields[groupName];
