@@ -23,7 +23,10 @@ function safeTraverse(obj, paths = []) {
     }
     return val === 0 ? '0' : val;
 }
-
+function setLogo(logo){
+    let logo_field = document.getElementById("logo");
+        logo_field.setAttribute("src", logo);
+}
   
 
 
@@ -69,7 +72,7 @@ window.onload = function () {
 
     const dictionary = {};
     const relatedFields = {};
-
+    setLogo(data.catalog_logo_url)
     for (const property of data.properties) {
         dictionary[property.field_id] = {
             name: property.name,
@@ -107,7 +110,7 @@ window.onload = function () {
             
             prod_container.innerHTML += `
             <div class="col1">
-                <img class="image" src="${product['productImage']}" onclick="window.open('${product['productImage']}','_blank')" >
+            <img class="image" src="${product['productImage'] ? product['productImage'] : 'images/coming-soon.webp'}" onclick="window.open('${product['productImage']}','_blank')" >
             </div>
             <div class="col2">
                 <hr class="pdpBreaker" >

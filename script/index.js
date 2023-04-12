@@ -47,7 +47,10 @@ function applyFilter(value,facetId) {
   localStorage.setItem('selectedValues', JSON.stringify(selectedValues));
   
 }
-
+function setLogo(logo){
+  let logo_field = document.getElementById("logo");
+      logo_field.setAttribute("src", logo);
+}
 
 const urlParams = new URLSearchParams(window.location.search);
 let searchQuery  = urlParams.get("q") || "";
@@ -66,9 +69,7 @@ window.onload = function () {
   let pageNumber = urlParams.get('page') || 1;
   let filterList= urlParams.get('facets') || ""; //problem with split
 
-  if(filterList!=""){
-    resetFilters()
-  }
+  
   let filterArray = filterList.split(",");
   console.log(filterArray)
   
@@ -106,27 +107,33 @@ window.onload = function () {
     redirect: 'follow'
   };
 
+  
+
   fetch("https://pim.unbxd.io/peppercorn/api/v2/catalogueView/6391b1448f93e67002742cef", requestOptions)
     .then(response => response.json())
     .then(result => {
               let prod_container = document.getElementById("outer-div");
               prod_container.innerHTML = "";
               let filter = document.getElementById("sidebar");
-              let logo_field = document.getElementById("logo");
               const {response: { products: product = [] }={} } = result
               
               console.log(product)
               const {response:{numberOfProducts : numberOfProducts=0 }={}} = result
 
-              
+              if(filterList!=""){
+                resetFilters()
+              }
               filter.innerHTML +=`<p class ="facet-header">Showing results for <b class="prod-count">${numberOfProducts}</b> products...`
               document.getElementById("page-num").value = numberOfProducts;
-              
+
+              if(numberOfProducts<21){
+                document.getElementById("pagination").style.display="none"
+              }
               
               for (let i = 0; i < product.length; i++) {
             
                   prod_container.innerHTML += `<div class="column"  onclick="window.open('product.html?uid=${product[i]['uniqueId']}','_blank')">
-                  <img class="image" src="${product[i]['productImage']}">
+                  <img class="image" src="${product[i]['productImage'] ? product[i]['productImage'] : 'images/coming-soon.webp'}">
                   <p class="image_text">${product[i]['productName']}</p>
                   <p class="price">${product[i]['uniqueId']}</p>
                   </a>
@@ -161,10 +168,33 @@ window.onload = function () {
                 
               }
           })
-      
           .catch(error => {
             alert('An error has occurred: ' + error.message);
           });
+
+          var raw1 = JSON.stringify({
+            "catalogue_id": "6391b1448f93e67002742cef",
+            "unique_id": prod_query
+            });
+        
+          var requestOptions01 = {
+              method: 'GET',
+              headers: myHeaders,
+              redirect: 'follow'
+          };
+            fetch("https://pim.unbxd.io/api/v1/catalogueConfig/6391b1448f93e67002742cef", requestOptions01)
+          .then(response => response.json())
+          .then(result => {
+            let data =result["data"] || {};
+            setLogo(data.catalog_logo_url)
+
+
+          })
+          .catch(error => {
+            alert('An error has occurred: ' + error.message);
+          });
+      
+          
         }
 
 

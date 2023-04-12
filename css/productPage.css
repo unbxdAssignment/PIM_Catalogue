@@ -46,18 +46,14 @@
 }
 
 .image:hover {
-  transition: 1s;
-  transform: scale(1.1);
+  
   border-radius: 5%;
   cursor: pointer;
-  box-shadow: rgba(25, 0, 255, 0.12) 0px 54px 55px,
-    rgba(25, 0, 255, 0.12) 0px -12px 30px, rgba(25, 0, 255, 0.12) 0px 4px 6px,
-    rgba(25, 0, 255, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 .image {
-  height: 300px;
-  width: auto;
+  height: 80%;
+  width: 80%;
   border-radius: 5%;
   border: 0.5px solid gray;
 }
@@ -92,7 +88,7 @@
   height: 100%;
   margin-left: 1%;
   margin-top: 7%;
-  padding-left: 50px;
+  padding-left: 3%;
   padding-top: 10px;
   background-color: #000000;
   font-family: Sans-Serif;

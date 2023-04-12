@@ -24,7 +24,6 @@
       <img id="logo" class="header-img" src="http://unbxd-pimento.s3.amazonaws.com/e17f1f63216d021d5fcbd7933c311b72/org/1678693343113_1670492620095_download%20copy%203.png"  onclick="home()" >
       <div class="search-container">
         <input type="search"  class ="search-input" id="query" placeholder="Explore the product inventory" value="" oninput="debounceSearch()">
-        
       </div>
     </div>
   </header>
@@ -168,7 +167,7 @@
     </div>
   </div>
 
-  <div class="pagination">
+  <div class="pagination" id="pagination">
     <!-- Pagination section for navigating through pages of products -->
     <button id="prev-page-btn" class="pagination-button" onclick="prevPage()">&laquo; Prev</button>
     <span id="page-num" class="page-num" value=""></span>
