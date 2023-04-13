@@ -101,7 +101,7 @@ window.onload = function () {
     myHeaders.append("sec-ch-ua-platform", "\"macOS\"");
 
     var raw = JSON.stringify({
-    "catalogue_id": "6391b1448f93e67002742cef",
+    "catalogue_id": "642a6751ae38fe17eaa2e37e",
     "unique_id": prod_query
     });
 
@@ -110,7 +110,7 @@ window.onload = function () {
         headers: myHeaders,
         redirect: 'follow'
     };
-    fetch("https://pim.unbxd.io/api/v1/catalogueConfig/6391b1448f93e67002742cef", requestOptions01)
+    fetch("https://pim.unbxd.io/api/v1/catalogueConfig/642a6751ae38fe17eaa2e37e", requestOptions01)
   .then(response => response.json())
   .then(result => {
 

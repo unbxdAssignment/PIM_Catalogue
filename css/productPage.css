@@ -178,3 +178,19 @@
   
 }
 
+.col4-footer{
+  float: left;
+  width: 100%;
+  height: 100%;
+  font-size: small;
+  color: whitesmoke;
+  margin-bottom: 5%;
+  padding-left: 10px;
+  padding-top: 10px;
+  font-family: Sans-Serif;
+  align-items: center;
+  margin: 20px 0;
+  background-color: #bc4d4d;
+  color: white;
+}
+

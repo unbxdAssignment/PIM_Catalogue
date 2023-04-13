@@ -48,8 +48,13 @@ function applyFilter(value,facetId) {
   
 }
 function setLogo(logo){
+  
+  if(logo === null){
+    logo = './images/logo.svg'
+  }
   let logo_field = document.getElementById("logo");
-      logo_field.setAttribute("src", logo);
+  console.log(logo);
+  logo_field.setAttribute("src", logo);
 }
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -67,7 +72,8 @@ window.onload = function () {
   const urlParams = new URLSearchParams(queryString);
   let prod_query = urlParams.get('q') || "";
   let pageNumber = urlParams.get('page') || 1;
-  let filterList= urlParams.get('facets') || ""; //problem with split
+  let filterList= urlParams.get('facets') || "";
+  // let catID = urlParams.get('catalogId') || "6391b1448f93e67002742cef";
 
   
   let filterArray = filterList.split(",");
@@ -109,7 +115,7 @@ window.onload = function () {
 
   
 
-  fetch("https://pim.unbxd.io/peppercorn/api/v2/catalogueView/6391b1448f93e67002742cef", requestOptions)
+  fetch("https://pim.unbxd.io/peppercorn/api/v2/catalogueView/642a6751ae38fe17eaa2e37e", requestOptions)
     .then(response => response.json())
     .then(result => {
               let prod_container = document.getElementById("outer-div");
@@ -131,7 +137,8 @@ window.onload = function () {
               }
               
               for (let i = 0; i < product.length; i++) {
-                  if(product[i]['productImage'].length>1){
+                  product[i]['productImage'] = product[i]['productImage'] || ['images/coming-soon.webp'];
+                  if(product[i]['productImage'].length > 1){
                     prod_container.innerHTML += `<div class="column"  onclick="window.open('product.html?uid=${product[i]['uniqueId']}','_blank')">
                     <img class="image" src="${product[i]['productImage'][0] ? product[i]['productImage'][0] : 'images/coming-soon.webp'}">
                     <p class="image_text">${product[i]['productName']}</p>
@@ -151,8 +158,8 @@ window.onload = function () {
                   
                 }
              
-              
-              const facetIds = Object.keys(result.facets);
+              const facetIds = Object.keys(result.facets ?? {});
+              // const facetIds = Object.keys(result.facets);
               // console.log(facetIds.length)
               for (const facetId of facetIds) {
                 const { displayName } = result.facets[facetId];
@@ -168,7 +175,7 @@ window.onload = function () {
                   filter.innerHTML += `
                     <li class="facet-list">
                       <label >
-                        <input type="checkbox" id="filter-checkbox" name="${values[i]}" value="${values[i]}" onclick="applyFilter('${values[i]}','${facetId}')" ${isChecked ? 'checked' : ''}>
+                        <input class ="checkbox"type="checkbox" id="filter-checkbox" name="${values[i]}" value="${values[i]}" onclick="applyFilter('${values[i]}','${facetId}')" ${isChecked ? 'checked' : ''}>
                         ${values[i]} (${values[i + 1]})
                       </label>
                     </li>
@@ -180,11 +187,11 @@ window.onload = function () {
               }
           })
           .catch(error => {
-            alert('An error has occurred: ' + error.message);
+            alert('An error has occurred 1 : ' + error.message);
           });
 
           var raw1 = JSON.stringify({
-            "catalogue_id": "6391b1448f93e67002742cef",
+            "catalogue_id": "642a6751ae38fe17eaa2e37e",
             "unique_id": prod_query
             });
         
@@ -193,7 +200,7 @@ window.onload = function () {
               headers: myHeaders,
               redirect: 'follow'
           };
-            fetch("https://pim.unbxd.io/api/v1/catalogueConfig/6391b1448f93e67002742cef", requestOptions01)
+            fetch("https://pim.unbxd.io/api/v1/catalogueConfig/642a6751ae38fe17eaa2e37e", requestOptions01)
           .then(response => response.json())
           .then(result => {
             let data =result["data"] || {};
@@ -202,7 +209,7 @@ window.onload = function () {
 
           })
           .catch(error => {
-            alert('An error has occurred: ' + error.message);
+            alert('An error has occurred 2 : ' + error.message);
           });
       
           
