@@ -70,7 +70,9 @@ function pdpImage(allimages){
     }
      
     }
+    if(allimages.length>1){
     setImage(allimages[0], document.querySelectorAll('.image-review')[0]);
+    }
     
 }
 
@@ -151,6 +153,8 @@ window.onload = function () {
             let price = product['field_390']+".00" || "";
             let decimal = (parseFloat(price).toFixed(2)).slice(-2) || "";
             let displayPrice = String(parseInt(price)) || "";
+
+            product['productImage'] = product['productImage'] || [];
             prod_container.innerHTML ="";
             
             prod_container.innerHTML += `

@@ -131,13 +131,24 @@ window.onload = function () {
               }
               
               for (let i = 0; i < product.length; i++) {
-            
-                  prod_container.innerHTML += `<div class="column"  onclick="window.open('product.html?uid=${product[i]['uniqueId']}','_blank')">
-                  <img class="image" src="${product[i]['productImage'][0] ? product[i]['productImage'][0] : 'images/coming-soon.webp'}">
-                  <p class="image_text">${product[i]['productName']}</p>
-                  <p class="price">${product[i]['uniqueId']}</p>
-                  </a>
-                  </div>`
+                  if(product[i]['productImage'].length>1){
+                    prod_container.innerHTML += `<div class="column"  onclick="window.open('product.html?uid=${product[i]['uniqueId']}','_blank')">
+                    <img class="image" src="${product[i]['productImage'][0] ? product[i]['productImage'][0] : 'images/coming-soon.webp'}">
+                    <p class="image_text">${product[i]['productName']}</p>
+                    <p class="price">${product[i]['uniqueId']}</p>
+                    </a>
+                    </div>`
+                  }
+                  else{
+                    prod_container.innerHTML += `<div class="column"  onclick="window.open('product.html?uid=${product[i]['uniqueId']}','_blank')">
+                    <img class="image" src="${product[i]['productImage'] ? product[i]['productImage'] : 'images/coming-soon.webp'}">
+                    <p class="image_text">${product[i]['productName']}</p>
+                    <p class="price">${product[i]['uniqueId']}</p>
+                    </a>
+                    </div>`
+
+                  }
+                  
                 }
              
               
