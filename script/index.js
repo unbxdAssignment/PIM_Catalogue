@@ -5,24 +5,34 @@ let selectedValues = localStorage.getItem('selectedValues') ? JSON.parse(localSt
 
 
 function debounceSearch() {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
   clearTimeout(timerId);
+
   timerId = setTimeout(() => {
     const { value: searchQuery = '' } = document.getElementById("query") || {};
+    let catID = urlParams.get("catalogId") || "";
     selectedValues = [];
-    window.parent.location=`index.html?q=${searchQuery}&facets=${selectedValues}&page=${pageNumber}`;
+    window.parent.location=`index.html?catalogId=${catID}&q=${searchQuery}&facets=${selectedValues}&page=${pageNumber}`;
   }, 300); // add a delay of 1500 milliseconds
 }
 
 function reset(){
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
   selectedValues = [];
   const { value: searchQuery = '' } = document.getElementById("query") || {};
+  let catID = urlParams.get("catalogId") || "";
   localStorage.setItem('selectedValues', JSON.stringify(selectedValues));
-  window.parent.location=`index.html?q${searchQuery}=&facets=${selectedValues}&page=${pageNumber}`;
+  window.parent.location=`index.html?catalogId=${catID}&q=${searchQuery}&facets=${selectedValues}&page=${pageNumber}`;
 }
 function home(){
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
   selectedValues = [];
   localStorage.setItem('selectedValues', JSON.stringify(selectedValues));
-  window.parent.location=`index.html?q=&facets=${selectedValues}&page=${pageNumber}`;
+  let catID = urlParams.get("catalogId") || "";
+  window.parent.location=`index.html?catalogId=${catID}&q=&facets=${selectedValues}&page=${pageNumber}`;
   
 }
 
@@ -43,7 +53,8 @@ function applyFilter(value,facetId) {
     selectedValues.splice(index, 1);
   }
   const { value: searchQuery = '' } = document.getElementById("query") || {};
-  window.parent.location=`index.html?q=${searchQuery}&facets=${selectedValues}&page=${pageNumber}`;
+  let catID = urlParams.get("catalogId") || "";
+  window.parent.location=`index.html?catalogId=${catID}&q=${searchQuery}&facets=${selectedValues}&page=${pageNumber}`;
   localStorage.setItem('selectedValues', JSON.stringify(selectedValues));
   
 }
@@ -73,7 +84,8 @@ window.onload = function () {
   let prod_query = urlParams.get('q') || "";
   let pageNumber = urlParams.get('page') || 1;
   let filterList= urlParams.get('facets') || "";
-  // let catID = urlParams.get('catalogId') || "6391b1448f93e67002742cef";
+  let catID = urlParams.get('catalogId') || "6391b1448f93e67002742cef";
+  
 
   
   let filterArray = filterList.split(",");
@@ -115,7 +127,7 @@ window.onload = function () {
 
   
 
-  fetch("https://pim.unbxd.io/peppercorn/api/v2/catalogueView/642a6751ae38fe17eaa2e37e", requestOptions)
+  fetch(`https://pim.unbxd.io/peppercorn/api/v2/catalogueView/${catID}`, requestOptions)
     .then(response => response.json())
     .then(result => {
               let prod_container = document.getElementById("outer-div");
@@ -139,7 +151,7 @@ window.onload = function () {
               for (let i = 0; i < product.length; i++) {
                   product[i]['productImage'] = product[i]['productImage'] || ['images/coming-soon.webp'];
                   if(product[i]['productImage'].length > 1){
-                    prod_container.innerHTML += `<div class="column"  onclick="window.open('product.html?uid=${product[i]['uniqueId']}','_blank')">
+                    prod_container.innerHTML += `<div class="column"  onclick="window.open('product.html?catalogId=${catID}&uid=${product[i]['uniqueId']}','_blank')">
                     <img class="image" src="${product[i]['productImage'][0] ? product[i]['productImage'][0] : 'images/coming-soon.webp'}">
                     <p class="image_text">${product[i]['productName']}</p>
                     <p class="price">${product[i]['uniqueId']}</p>
@@ -147,7 +159,7 @@ window.onload = function () {
                     </div>`
                   }
                   else{
-                    prod_container.innerHTML += `<div class="column"  onclick="window.open('product.html?uid=${product[i]['uniqueId']}','_blank')">
+                    prod_container.innerHTML += `<div class="column"  onclick="window.open('product.html?catalogId=${catID}&uid=${product[i]['uniqueId']}','_blank')">
                     <img class="image" src="${product[i]['productImage'] ? product[i]['productImage'] : 'images/coming-soon.webp'}">
                     <p class="image_text">${product[i]['productName']}</p>
                     <p class="price">${product[i]['uniqueId']}</p>
@@ -191,7 +203,7 @@ window.onload = function () {
           });
 
           var raw1 = JSON.stringify({
-            "catalogue_id": "642a6751ae38fe17eaa2e37e",
+            "catalogue_id": catID,
             "unique_id": prod_query
             });
         
@@ -200,7 +212,7 @@ window.onload = function () {
               headers: myHeaders,
               redirect: 'follow'
           };
-            fetch("https://pim.unbxd.io/api/v1/catalogueConfig/642a6751ae38fe17eaa2e37e", requestOptions01)
+            fetch(`https://pim.unbxd.io/api/v1/catalogueConfig/${catID}`, requestOptions01)
           .then(response => response.json())
           .then(result => {
             let data =result["data"] || {};

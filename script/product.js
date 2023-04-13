@@ -4,10 +4,14 @@ let selectedValues = localStorage.getItem('selectedValues') ? JSON.parse(localSt
 
 
 function home() {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+
     selectedValues = localStorage.getItem('selectedValues') ? JSON.parse(localStorage.getItem('selectedValues')) : [];
      // load selectedValues from localStorage, or initialize as empty array
     localStorage.setItem('selectedValues', JSON.stringify(selectedValues));
-    window.parent.location = `index.html?q=&facets=${selectedValues}&page=${pageNumber}`;
+    let catID = urlParams.get("catalogId") || "";
+    window.parent.location = `index.html?catalogId=${catID}&q=&facets=${selectedValues}&page=${pageNumber}`;
 }
 
 function safeTraverse(obj, paths = []) {
@@ -82,7 +86,8 @@ window.onload = function () {
     const queryString = window.location.search; // get the query string from the current URL
     const urlParams = new URLSearchParams(queryString); // create a new URLSearchParams object from the query string
     let prod_query = urlParams.get('uid'); // get the value of the 'uid' parameter from the URL and store it in a variable called prod_query.
-
+    let catID = urlParams.get('catalogId') || "6391b1448f93e67002742cef";
+    console.log(catID)
     var myHeaders = new Headers();
     myHeaders.append("Accept", "*/*");
     myHeaders.append("Accept-Language", "en-GB,en-US;q=0.9,en;q=0.8");
@@ -101,7 +106,7 @@ window.onload = function () {
     myHeaders.append("sec-ch-ua-platform", "\"macOS\"");
 
     var raw = JSON.stringify({
-    "catalogue_id": "642a6751ae38fe17eaa2e37e",
+    "catalogue_id": catID,
     "unique_id": prod_query
     });
 
@@ -110,7 +115,7 @@ window.onload = function () {
         headers: myHeaders,
         redirect: 'follow'
     };
-    fetch("https://pim.unbxd.io/api/v1/catalogueConfig/642a6751ae38fe17eaa2e37e", requestOptions01)
+    fetch(`https://pim.unbxd.io/api/v1/catalogueConfig/${catID}`, requestOptions01)
   .then(response => response.json())
   .then(result => {
 
@@ -143,7 +148,7 @@ window.onload = function () {
         redirect: 'follow'
         };
     
-        fetch("https://pim.unbxd.io/peppercorn/api/v2/catalogueProduct", requestOptions02)
+        fetch(`https://pim.unbxd.io/peppercorn/api/v2/catalogueProduct`, requestOptions02)
         .then(response => response.json())
         .then(result => {
 
