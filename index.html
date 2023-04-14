@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Template-01</title>
+  <title>PLP</title>
 
   <!-- External stylesheets to be included -->
   <link rel="stylesheet" href="css/style.css">
@@ -21,7 +21,7 @@
   <header class="header-container-main">
     <!-- Header section of the document -->
     <div class="header-container-up">
-      <img id="logo" class="header-img" src="images/logo.svg"  onclick="home()" >
+      <img id="logo" class="header-img" src="images/unbxd-logo.png"  onclick="home()" >
       <div class="search-container">
         <input type="search"  class ="search-input" id="query" placeholder="Explore the product inventory" value="" oninput="debounceSearch()">
       </div>
@@ -172,8 +172,10 @@
     <span id="page-num" class="page-num" value=""></span>
     <button id="next-page-btn" class="pagination-button" onclick="nextPage()">Next &raquo;</button>
   </div>
-  <div class="catalog-footer"><p>© 2023 Unbxd Inc., All Rights Reserved.</p></div>
-
+  
+  <footer class="footer" id="ftr">
+    <p>2023 UNBXD PIM. All rights reserved.</p>
+  </footer>
 
   <!-- JavaScript files to be included -->
   <script src="script/index.js"></script>

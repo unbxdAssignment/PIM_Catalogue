@@ -4,6 +4,7 @@
 
 .product-body {
   background-color: black;
+  position: relative;
 }
 
 .column-heading {
@@ -61,10 +62,9 @@
 }
 
 .image-review:hover {
-  box-shadow: rgba(96, 79, 255, 0.12) 0px 54px 55px,
-    rgba(25, 0, 255, 0.12) 0px -12px 30px, rgba(25, 0, 255, 0.12) 0px 4px 6px,
-    rgba(25, 0, 255, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-  transform: scale(1.2);
+  box-shadow: rgba(203, 59, 59, 0.572)0px 4px 4px,
+  rgba(203, 59, 59, 0.572) 0px -12px 30px,rgba(203, 59, 59, 0.572) 0px 4px 6px,
+  rgba(203, 59, 59, 0.572) 0px 8px 13px,rgba(203, 59, 59, 0.572) 0px -3px 5px;
   border-radius: 5%;
   transition: 0.5s;
   margin: 0.5%;
@@ -178,7 +178,7 @@
   
 }
 
-.col4-footer{
+.col-footer{
   float: left;
   width: 100%;
   height: 100%;
@@ -192,5 +192,6 @@
   margin: 20px 0;
   background-color: #bc4d4d;
   color: white;
+  text-align: right;
 }
 

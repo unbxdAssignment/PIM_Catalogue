@@ -37,6 +37,7 @@ let currentImage=null;
 function setImage(imageUrl, clickedImage){
     let pdpImage = document.getElementById("pdp-image");
     pdpImage.setAttribute("src",imageUrl);
+    pdpImage.setAttribute('onclick', `window.open('${imageUrl}', '_blank')`);
 
     if (currentImage !== null) {
         currentImage.style.transform = "scale(1)";
@@ -51,11 +52,9 @@ function setImage(imageUrl, clickedImage){
 
     clickedImage.style.transform = "scale(1.2)"; // increase the scale by 20%
     clickedImage.style.boxShadow =
-    "rgba(96, 79, 255, 0.12) 0px 54px 55px, " +
-    "rgba(25, 0, 255, 0.12) 0px -12px 30px, " +
-    "rgba(25, 0, 255, 0.12) 0px 4px 6px, " +
-    "rgba(25, 0, 255, 0.17) 0px 12px 13px, " +
-    "rgba(0, 0, 0, 0.09) 0px -3px 5px";;
+    "rgba(203, 59, 59, 0.572)0px 4px 4px,"+
+    "rgba(203, 59, 59, 0.572) 0px -12px 30px,"+ "rgba(203, 59, 59, 0.572) 0px 4px 6px,"+
+    "rgba(203, 59, 59, 0.572) 0px 8px 13px,"+ "rgba(203, 59, 59, 0.572) 0px -3px 5px";
 }
 
 function pdpImage(allimages){
@@ -123,7 +122,7 @@ window.onload = function () {
 
     const dictionary = {};
     const relatedFields = {};
-    setLogo(data.catalog_logo_url)
+    setLogo(data.catalog_logo_url ?? "./images/unbxd-logo.png")
     for (const property of data.properties) {
         dictionary[property.field_id] = {
             name: property.name,
@@ -164,7 +163,7 @@ window.onload = function () {
             
             prod_container.innerHTML += `
             <div class="col1">
-                <img class="image" id="pdp-image" src="${product['productImage'][0] ? product['productImage'][0] : 'images/coming-soon.webp'}" onclick="window.open('${product['productImage']}','_blank')" >
+                <img class="image" id="pdp-image" src="${product['productImage'][0] ? product['productImage'][0] : 'images/coming-soon.webp'}" onclick="window.open('${product['productImage'][0]}','_blank')" >
             </div>
             <div class="col2">
                 <hr class="pdpBreaker" >
@@ -191,7 +190,8 @@ window.onload = function () {
             </div>
             <div class="col4" id="more_info">
             <p class="column-heading">More Information</p>
-            
+            </div>
+            <div class="col-footer" id="pdp-footer">
             </div>
             `
             pdpImage(product['productImage'])
@@ -206,6 +206,7 @@ window.onload = function () {
                 }
                 let count=0 
                 let more_info=document.getElementById("more_info");
+                let footer=document.getElementById("pdp-footer");
 
                 more_info.innerHTML +=`<hr class="pdpBreaker"><p class="column-heading-inner">${groupName}</p>`
                 
@@ -223,10 +224,15 @@ window.onload = function () {
                         count++
                     }
                     
+                    
                 }
                 if(count==0){
                     more_info.innerHTML +=`<p class="info">No properties in this group</p>`
                 }
+                footer.innerHTML="";
+                footer.innerHTML += `
+                <p>2023 UNBXD PIM. All rights reserved.</p>
+                `   
             }
             
         })

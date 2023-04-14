@@ -14,7 +14,7 @@ function debounceSearch() {
     let catID = urlParams.get("catalogId") || "";
     selectedValues = [];
     window.parent.location=`index.html?catalogId=${catID}&q=${searchQuery}&facets=${selectedValues}&page=${pageNumber}`;
-  }, 300); // add a delay of 1500 milliseconds
+  }, 500); // add a delay of 1500 milliseconds
 }
 
 function reset(){
@@ -54,14 +54,17 @@ function applyFilter(value,facetId) {
   }
   const { value: searchQuery = '' } = document.getElementById("query") || {};
   let catID = urlParams.get("catalogId") || "";
+  clearTimeout(timerId);
+  timerId = setTimeout(() => {
   window.parent.location=`index.html?catalogId=${catID}&q=${searchQuery}&facets=${selectedValues}&page=${pageNumber}`;
   localStorage.setItem('selectedValues', JSON.stringify(selectedValues));
+  }, 1000);
   
 }
 function setLogo(logo){
   
   if(logo === null){
-    logo = './images/logo.svg'
+    logo = './images/unbxd-logo.png'
   }
   let logo_field = document.getElementById("logo");
   console.log(logo);
@@ -145,7 +148,8 @@ window.onload = function () {
               document.getElementById("page-num").value = numberOfProducts;
 
               if(numberOfProducts<21){
-                document.getElementById("pagination").style.display="none"
+                document.getElementById("pagination").style.display="none";
+                document.getElementById("ftr").style.display="none";
               }
               
               for (let i = 0; i < product.length; i++) {
