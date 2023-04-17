@@ -21,7 +21,7 @@
   left: 20px;
   margin-top: 8%;
   padding: 10px;
-  width: 16%;
+  width: 20%;
   height: 80%;
   position: fixed;
   overflow: auto;
@@ -251,6 +251,7 @@
   padding: 20px;
   height: 80%;
   background-color: #000;
+  margin-top: 100px;
   /* Height of the footer */
 }
 
@@ -328,3 +329,49 @@
   font-size: small;
   
 }
+
+.facets-container {
+  display: block;
+}
+
+.abc {
+  width: 75%;
+  float: right;
+}
+
+.mobile-filter {
+  display: none;
+}
+
+.sidebar-mobile {
+  display: none;
+  width: 100%;
+  position: absolute;
+  top: 100px;
+}
+
+@media (max-width:861px)  {
+  .facets-container {
+    display: none;
+  }
+  .sidebar {
+    width: 0;
+  }
+
+  .abc {
+    width: 100%
+  }
+
+  .mobile-filter {
+    display: block;
+  }
+}
+
+
+// onclick of filter button
+
+.sidebar-mobile {
+  display: block
+}
+
+

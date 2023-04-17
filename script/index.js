@@ -203,7 +203,7 @@ window.onload = function () {
               }
           })
           .catch(error => {
-            alert('An error has occurred 1 : ' + error.message);
+            // alert('An error has occurred 1 : ' + error.message);
           });
 
           var raw1 = JSON.stringify({
@@ -225,10 +225,10 @@ window.onload = function () {
 
           })
           .catch(error => {
-            alert('An error has occurred 2 : ' + error.message);
+            // alert('An error has occurred 2 : ' + error.message);
           });
       
-          
+          document.getElementById('mobile-sidebar').classList().append('show-sidebar');
         }
 
 

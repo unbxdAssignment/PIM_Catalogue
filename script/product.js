@@ -237,10 +237,10 @@ window.onload = function () {
             
         })
         .catch(error => {
-            alert('An error has occurred: ' + error.message);
+            // alert('An error has occurred: ' + error.message);
           });
   })
   .catch(error => {
-    alert('An error has occurred: ' + error.message);
+    // alert('An error has occurred: ' + error.message);
   });
 }
