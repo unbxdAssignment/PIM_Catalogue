@@ -137,7 +137,7 @@
   border-bottom-left-radius: 20px;
   font-family: Sans-Serif;
   color: whitesmoke;
-  box-shadow: 0 0 3px 1px rgb(53, 53, 53);
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
 }
 
 .col4 {
@@ -157,7 +157,7 @@
   border-top-left-radius: 20px;
   border-bottom-right-radius: 20px;
   border-bottom-left-radius: 20px;
-  box-shadow: 0 0 3px 1px rgb(53, 53, 53);
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
 }
 
 .col5 {

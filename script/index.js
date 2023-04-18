@@ -133,8 +133,10 @@ window.onload = function () {
   fetch(`https://pim.unbxd.io/peppercorn/api/v2/catalogueView/${catID}`, requestOptions)
     .then(response => response.json())
     .then(result => {
-              let prod_container = document.getElementById("outer-div");
-              prod_container.innerHTML = "";
+              // let prod_container = document.getElementById("outer-div");
+              let grids = document.getElementById("grid-row");
+              grids.innerHTML = "";
+              // prod_container.innerHTML = "";
               let filter = document.getElementById("sidebar");
               const {response: { products: product = [] }={} } = result
               
@@ -155,19 +157,21 @@ window.onload = function () {
               for (let i = 0; i < product.length; i++) {
                   product[i]['productImage'] = product[i]['productImage'] || ['images/coming-soon.webp'];
                   if(product[i]['productImage'].length > 1){
-                    prod_container.innerHTML += `<div class="column"  onclick="window.open('product.html?catalogId=${catID}&uid=${product[i]['uniqueId']}','_blank')">
+                    grids.innerHTML += `<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"  onclick="window.open('product.html?catalogId=${catID}&uid=${product[i]['uniqueId']}','_blank')">
+                    <div class="products-card">
                     <img class="image" src="${product[i]['productImage'][0] ? product[i]['productImage'][0] : 'images/coming-soon.webp'}">
-                    <p class="image_text">${product[i]['productName']}</p>
                     <p class="price">${product[i]['uniqueId']}</p>
-                    </a>
+                    <p class="image_text">${product[i]['productName']}</p>
+                    </div>
                     </div>`
                   }
                   else{
-                    prod_container.innerHTML += `<div class="column"  onclick="window.open('product.html?catalogId=${catID}&uid=${product[i]['uniqueId']}','_blank')">
+                    grids.innerHTML += `<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"  onclick="window.open('product.html?catalogId=${catID}&uid=${product[i]['uniqueId']}','_blank')">
+                    <div class="products-card">
                     <img class="image" src="${product[i]['productImage'] ? product[i]['productImage'] : 'images/coming-soon.webp'}">
-                    <p class="image_text">${product[i]['productName']}</p>
                     <p class="price">${product[i]['uniqueId']}</p>
-                    </a>
+                    <p class="image_text">${product[i]['productName']}</p>
+                    </div>
                     </div>`
 
                   }
