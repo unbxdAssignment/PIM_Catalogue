@@ -52,9 +52,8 @@ function setImage(imageUrl, clickedImage){
 
     clickedImage.style.transform = "scale(1.2)"; // increase the scale by 20%
     clickedImage.style.boxShadow =
-    "rgba(203, 59, 59, 0.572)0px 4px 4px,"+
-    "rgba(203, 59, 59, 0.572) 0px -12px 30px,"+ "rgba(203, 59, 59, 0.572) 0px 4px 6px,"+
-    "rgba(203, 59, 59, 0.572) 0px 8px 13px,"+ "rgba(203, 59, 59, 0.572) 0px -3px 5px";
+    "rgba(0, 0, 0, 0.3) 0px 19px 38px,"+ "rgba(0, 0, 0, 0.22) 0px 15px 12px";
+    
 }
 
 function pdpImage(allimages){
@@ -169,18 +168,17 @@ window.onload = function () {
                 <hr class="pdpBreaker" >
                 <p class="product-title">${product['productName']}</p>
                 <hr class="pdpBreaker" >
-                ${!isNaN(displayPrice) ? `<p class="info">${dictionary['field_390'].name} : &#8377;${displayPrice}.${decimal}</sup></p>` : '' }  
-                ${product['field_485'] ? `<hr>
-                <p class="info">${dictionary['field_485'].name} : ${product['field_485']}</p>` : ''}
-                ${product['uniqueId'] ? `<hr>
-                <p class="info">${dictionary['uniqueId'].name} : ${product["uniqueId"]}</p>` : ''}
-                ${product['parentId'] ? `<hr>
-                <p class="info">${dictionary['parentId'].name} : ${product['parentId']}</p>` : ''}
-                ${product['updated_at'] ? `<hr>
-                <p class="info">Updated On : ${product['updated_at']}</p>` : ''}
-                ${product['product_status'] ? `<hr>
-                <p class="info">Product Status : ${product['product_status']}</p>` : ''}
-                <hr class="pdpBreaker" >
+                ${!isNaN(displayPrice) ? `<p class="info"  data-label="${dictionary['field_390'] ? dictionary['field_390'].name : ''}" > : &#8377;${displayPrice}.${decimal}</sup></p>` : '' }  
+                ${product['field_485'] ? `
+                <p class="info"  data-label="${dictionary['field_485'] ? dictionary['field_485'].name : ''}" > : ${product['field_485']}</p>` : ''}
+                ${product['uniqueId'] ? `
+                <p class="info" data-label="${dictionary['uniqueId'] ? dictionary['uniqueId'].name : ''}" > : ${product["uniqueId"]}</p>` : ''}
+                ${product['parentId'] ? `
+                <p class="info" data-label="${dictionary['parentId'] ? dictionary['parentId'].name : ''}">${dictionary['parentId'].name} : ${product['parentId']}</p>` : ''}
+                ${product['updated_at'] ? `
+                <p class="info" data-label="Updated On"> : ${product['updated_at']}</p>` : ''}
+                ${product['product_status'] ? `
+                <p class="info" data-label="Product Status"> : ${product['product_status']}</p>` : ''}
             </div>
             <div class="col5" id="pdp-preview">
                 <p class="column-heading">Images</p>
@@ -215,12 +213,12 @@ window.onload = function () {
                 for (const fieldId of groupFields) {
                     
                     if(fieldId.includes("field") && product[fieldId]!==undefined && fieldId!="field_476"){
-                        more_info.innerHTML +=`<p class="info"><b>${dictionary[fieldId].name}</b> : ${product[fieldId]}</p>`
+                        more_info.innerHTML +=`<p class="info" data-label="${dictionary[fieldId].name}"> : ${product[fieldId]}</p>`
                         count++;
                         
                     }
                     else if(product[fieldId]!==undefined && fieldId!="field_476"){
-                        more_info.innerHTML +=`<p class="info"><b>${fieldId}</b> : ${product[fieldId]}</p>`
+                        more_info.innerHTML +=`<p class="info" data-label="${dictionary[fieldId].name}"> : ${product[fieldId]}</p>`
                         count++
                     }
                     

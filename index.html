@@ -28,11 +28,10 @@
       </div>
     </div>
   </header>
-
-
-
-  <div class="content row">
-    <!-- Main content section of the document -->
+  
+  
+  
+  <div class="content">
     <div class="sidebar facets-container" id="sidebar">
       <p class="filter-heading">Filters</p>
       <hr class="facet-list">
@@ -41,8 +40,8 @@
 
     </div>
 
-    <div id="outer-div">
-      <button class="mobile-filter" onClick="">filter</button>
+    <div id="outer-div" class="catalog-list">
+      <!-- <button class="mobile-filter" onClick="">filter</button>
       <div class="sidebar-mobile">
         <div class="facets-container">
           <p class="filter-heading">Filters</p>
@@ -51,31 +50,39 @@
           </div>
     
         </div>
-      </div>
+      </div> -->
       <!-- Product grid to be populated dynamically -->
-      <div class="row abc">
-        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+      <div class="row abc" id="grid-row">
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 catalog-grid">
+          <div class="products-card">
           <img class="image" src="images/loading.gif">
           <p class="image_text">Product Name 1</p>
           <p class="price">1919191919</p>
+          </div>
         </div>
 
         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+          <div class="products-card">
           <img class="image" src="images/loading.gif">
           <p class="image_text">Product Name 2</p>
           <p class="price">1919191919</p>
+          </div>
         </div>
 
         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+          <div class="products-card">
           <img class="image" src="images/loading.gif">
           <p class="image_text">Product Name 3</p>
           <p class="price">1919191919</p>
         </div>
+        </div>
 
         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+          <div class="products-card">
           <img class="image" src="images/loading.gif">
           <p class="image_text">Product Name 4</p>
           <p class="price">1919191919</p>
+          </div>
         </div>
 
         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
