@@ -159,7 +159,7 @@ window.onload = function () {
                   if(product[i]['productImage'].length > 1){
                     grids.innerHTML += `<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"  onclick="window.open('product.html?catalogId=${catID}&uid=${product[i]['uniqueId']}','_blank')">
                     <div class="products-card">
-                    <img class="image" src="${product[i]['productImage'][0] ? product[i]['productImage'][0] : 'images/coming-soon.webp'}">
+                    <img class="image img-thumbnail" src="${product[i]['productImage'][0] ? product[i]['productImage'][0] : 'images/coming-soon.webp'}">
                     <p class="price">${product[i]['uniqueId']}</p>
                     <p class="image_text">${product[i]['productName']}</p>
                     </div>
@@ -168,7 +168,7 @@ window.onload = function () {
                   else{
                     grids.innerHTML += `<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"  onclick="window.open('product.html?catalogId=${catID}&uid=${product[i]['uniqueId']}','_blank')">
                     <div class="products-card">
-                    <img class="image" src="${product[i]['productImage'] ? product[i]['productImage'] : 'images/coming-soon.webp'}">
+                    <img class="image img-thumbnail" src="${product[i]['productImage'] ? product[i]['productImage'] : 'images/coming-soon.webp'}">
                     <p class="price">${product[i]['uniqueId']}</p>
                     <p class="image_text">${product[i]['productName']}</p>
                     </div>
