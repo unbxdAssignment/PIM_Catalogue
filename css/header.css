@@ -75,7 +75,7 @@
   margin-bottom: 1%;
   margin-top: 1%;
   cursor: pointer;
-  background-color: #535353;
+  background-color: #53535379;
   border: none;
   border-radius: 6px;
   color: white;
@@ -88,7 +88,7 @@
   font-weight: 300;
 }
 .back-btn:hover {
-  background-color: #ff7272;
+  background-color: #424874;
 }
 
 .header-img {
@@ -99,10 +99,7 @@
 }
 .header-img-pdp {
   margin-left: 82%;
-  border-top-right-radius: 17px;
-  border-top-left-radius: 17px;
-  border-bottom-right-radius: 17px;
-  border-bottom-left-radius: 17px;
+  border-radius: 8px;
   float:right;
   width:6%;
   height:80%;

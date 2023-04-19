@@ -3,36 +3,36 @@
 }
 
 .product-body {
-  background-color: black;
+  background-color: #FEFDFD;
   position: relative;
 }
 
 .column-heading {
   text-transform: capitalize;
   font-size: 24px;
-  font-weight: 500;
+  font-weight: 300;
   font-stretch: condensed;
   padding: 5px;
   font-family: Sans-Serif;
   text-align: center;
-  color: #abc9ff;
+  color: #674188;
 }
 
 .column-heading-inner {
   text-transform: capitalize;
   font-size: 22px;
-  font-weight: 500;
+  font-weight: 300;
   font-stretch: condensed;
   padding: 5px;
   font-family: Sans-Serif;
   text-align: left;
-  /* color: #ff7272; */
+  color: #674188;
 }
 
 .product-title {
   text-transform: capitalize;
-  font-size: 28px;
-  font-weight: 500;
+  font-size: 24px;
+  font-weight: 400;
   font-stretch: condensed;
   padding: 5px;
   font-family: Sans-Serif;
@@ -44,6 +44,13 @@
   font-family: Sans-Serif;
   padding: 5px;
   font-weight: 300;
+  color: #3b6fcc;
+}
+.info::before {
+  content: attr(data-label);
+  display: inline-block;
+  color: #674188;
+  font-weight: 350;
 }
 
 .image {
@@ -59,12 +66,11 @@
   border: 0.5px solid gray;
   margin: 1%;
   transition: transform 0.2s ease-in-out;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
 
 .image-review:hover {
-  box-shadow: rgba(203, 59, 59, 0.572)0px 4px 4px,
-  rgba(203, 59, 59, 0.572) 0px -12px 30px,rgba(203, 59, 59, 0.572) 0px 4px 6px,
-  rgba(203, 59, 59, 0.572) 0px 8px 13px,rgba(203, 59, 59, 0.572) 0px -3px 5px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
   border-radius: 5%;
   transition: 0.5s;
   margin: 0.5%;
@@ -102,7 +108,7 @@
   margin-top: 7%;
   padding-left: 3%;
   padding-top: 10px;
-  background-color: #000000;
+  background-color: #FEFDFD;
   font-family: Sans-Serif;
 }
 
@@ -110,16 +116,16 @@
   float: left;
   width: 63%;
   height: 90%;
-  color: #abc9ff;
+  color: #424874;
   margin-top: 10%;
   padding-left: 10px;
-  background-color: #000000;
+  background-color: #F9F7F7;
   border-top-right-radius: 20px;
   border-top-left-radius: 20px;
   border-bottom-right-radius: 20px;
   border-bottom-left-radius: 20px;
   font-family: Sans-Serif;
-  box-shadow: 0 0 3px 1px rgb(53, 53, 53);
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   /* border: 1px solid rgb(216, 216, 216); */
 }
 .col3 {
@@ -130,14 +136,14 @@
   margin-left: 5%;
   padding-left: 10px;
   padding-top: 10px;
-  background-color: #121212;
+  background-color: #F9F7F7;
   border-top-right-radius: 20px;
   border-top-left-radius: 20px;
   border-bottom-right-radius: 20px;
   border-bottom-left-radius: 20px;
   font-family: Sans-Serif;
-  color: whitesmoke;
-  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+  color:#3b6fcc;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 
 .col4 {
@@ -145,19 +151,20 @@
   width: 90%;
   height: 100%;
   font-size: small;
-  color: whitesmoke;
+  
   margin-top: 5%;
   margin-left: 5%;
   margin-bottom: 5%;
   padding-left: 10px;
   padding-top: 10px;
-  background-color: #121212;
+  background-color: #F9F7F7;
   font-family: Sans-Serif;
   border-top-right-radius: 20px;
   border-top-left-radius: 20px;
   border-bottom-right-radius: 20px;
   border-bottom-left-radius: 20px;
-  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+  color: rgb(55, 55, 55);
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 
 .col5 {
@@ -168,11 +175,11 @@
   margin-left: 5%;
   padding-left: 10px;
   padding-top: 10px;
-  background-color: #000000;
+  background-color: #F9F7F7;
   border-radius: 10px;
   font-family: Sans-Serif;
-  color: whitesmoke;
-  box-shadow: 0 0 3px 1px #ff7272;
+  color: #3b6fcc;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   text-align: center;
   cursor: pointer;
   
@@ -183,15 +190,15 @@
   width: 100%;
   height: 100%;
   font-size: small;
-  color: whitesmoke;
+  color: #674188;
   margin-bottom: 5%;
   padding-left: 10px;
   padding-top: 10px;
   font-family: Sans-Serif;
   align-items: center;
   margin: 20px 0;
-  background-color: #bc4d4d;
-  color: white;
+  background-color: #F9F7F7;
   text-align: right;
 }
+
 
